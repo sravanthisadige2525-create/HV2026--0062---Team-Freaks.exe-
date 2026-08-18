@@ -1,0 +1,10 @@
+{
+  "name": "AI Career & Skill Platform",
+  "description": "AI-Based Skill Assessment & Personalized Career Recommendation System with realistic Internship Simulations, AI Interviews, Code Arena, and Learning Roadmaps.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
