@@ -106,8 +106,3 @@ Explain briefly how to access the application locally and mention any required S
 **Demo Video:**
 [Add URL]
 
-Keep the README concise and professional. Do not add unnecessary sections beyond the organizer's format unless genuinely required.
-
-Also create a separate `LICENSE` file using the **MIT License**, with the current year and a placeholder for the team/project owner name.
-
-Do not include real API keys, passwords, Supabase service-role keys, or other secrets.
