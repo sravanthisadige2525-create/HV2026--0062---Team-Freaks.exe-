@@ -150,7 +150,7 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
         'Participate in daily engineering scrums'
       ],
       requiredSkills: newSkills.split(',').map(s => s.trim()).filter(Boolean),
-      applyUrl: 'https://example.com/apply',
+      applyUrl: `${window.location.origin}${window.location.pathname}#/internships`,
       hasDemo: true,
       simulationProjectId: 'sim_cloudscale'
     };

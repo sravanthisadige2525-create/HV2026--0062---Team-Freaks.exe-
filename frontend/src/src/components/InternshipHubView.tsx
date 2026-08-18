@@ -301,7 +301,7 @@ export const InternshipHubView: React.FC<InternshipHubViewProps> = ({
       </div>
 
       {/* Floating / Embedded Responsive Humanized Chatbot */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-4 right-4 left-4 sm:bottom-6 sm:right-6 sm:left-auto z-40">
         {!isChatOpen ? (
           <button
             onClick={() => setIsChatOpen(true)}
@@ -312,7 +312,7 @@ export const InternshipHubView: React.FC<InternshipHubViewProps> = ({
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
           </button>
         ) : (
-          <div className="w-80 sm:w-96 rounded-3xl glass-panel p-4 border border-indigo-500/40 shadow-2xl flex flex-col h-[460px] animate-in fade-in slide-in-from-bottom-5">
+          <div className="w-full sm:w-96 max-w-full rounded-3xl glass-panel p-4 border border-indigo-500/40 shadow-2xl flex flex-col h-[min(460px,calc(100vh-7rem))] animate-in fade-in slide-in-from-bottom-5">
             {/* Chatbot Header */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-800">
               <div className="flex items-center gap-2.5">

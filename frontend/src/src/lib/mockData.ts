@@ -4,6 +4,7 @@ import {
   Internship, 
   InternshipSimulation, 
   Course, 
+  CourseLesson,
   CodingProblem, 
   Mentor, 
   MentorTip, 
@@ -387,6 +388,273 @@ export const SAMPLE_ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
   }
 ];
 
+SAMPLE_ASSESSMENT_QUESTIONS.push(
+  {
+    id: 'q_py_3',
+    category: 'technical',
+    topic: 'Python',
+    question: 'Why is a generator expression often preferable to building a large list in memory?',
+    options: [
+      'It produces values lazily, reducing peak memory usage for one-pass processing',
+      'It automatically runs code on multiple CPU cores',
+      'It permanently stores every value in a faster cache',
+      'It converts Python objects into database rows'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_java_3',
+    category: 'technical',
+    topic: 'Java',
+    question: 'Which Java feature is designed to guarantee that a shared variable read sees the latest write from another thread?',
+    options: [
+      'The volatile keyword, which provides visibility guarantees for that variable',
+      'The final keyword on every local variable',
+      'Method overloading at compile time',
+      'A private constructor on the containing class'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_dsa_3',
+    category: 'logical',
+    topic: 'DSA',
+    question: 'Which data structure is the best fit for breadth-first traversal of an unweighted graph?',
+    options: [
+      'A queue, because vertices are processed in increasing distance from the source',
+      'A stack, because it always explores the shortest path first',
+      'A sorted array, because edges must be ordered',
+      'A hash set alone, because it stores traversal order'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_dbms_3',
+    category: 'mcq',
+    topic: 'DBMS',
+    question: 'What does database normalization primarily help prevent?',
+    options: [
+      'Duplicate and inconsistent data caused by update, insert, and delete anomalies',
+      'All network latency between an application and database',
+      'The need for indexes on every table',
+      'Every transaction deadlock regardless of query design'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_os_3',
+    category: 'technical',
+    topic: 'OS',
+    question: 'What is the purpose of a context switch in a multitasking operating system?',
+    options: [
+      'To save one task state and restore another so the CPU can switch execution',
+      'To permanently delete a process from the file system',
+      'To increase RAM capacity without hardware changes',
+      'To convert a user process into a database transaction'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_cn_3',
+    category: 'technical',
+    topic: 'CN',
+    question: 'What is the primary purpose of DNS in a web request?',
+    options: [
+      'To translate a human-readable domain name into an IP address',
+      'To encrypt HTTP response bodies using a browser certificate',
+      'To guarantee that packets arrive in order over UDP',
+      'To store the complete HTML document for a website'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_web_3',
+    category: 'coding',
+    topic: 'Web Development',
+    question: 'When a fetch request returns a non-2xx response, what should robust client code do before parsing success data?',
+    options: [
+      'Check response.ok or response.status and route the request to an error state',
+      'Assume JSON parsing will always throw automatically',
+      'Reload the page repeatedly until the server responds',
+      'Ignore the response and update the UI as successful'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_ai_3',
+    category: 'technical',
+    topic: 'AI/ML',
+    question: 'Why should an AI application validate tool-call arguments before executing them?',
+    options: [
+      'To prevent malformed or unsafe model-generated values from reaching external systems',
+      'To make the model context window unlimited',
+      'To remove the need for authentication on the tool',
+      'To guarantee that every model response is creative'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_ds_2',
+    category: 'technical',
+    topic: 'Data Science',
+    question: 'What does a p-value help an analyst evaluate in a hypothesis test?',
+    options: [
+      'How compatible the observed data is with the null hypothesis under the chosen test assumptions',
+      'The percentage of missing values in a dataframe',
+      'The exact probability that the null hypothesis is true',
+      'The number of rows required for every machine learning model'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_cloud_2',
+    category: 'technical',
+    topic: 'Cloud',
+    question: 'What is the main purpose of a readiness probe in a Kubernetes deployment?',
+    options: [
+      'To prevent traffic from reaching a container until the application is ready',
+      'To permanently restart every container after one request',
+      'To store cloud credentials inside the image',
+      'To replace all application-level monitoring'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_sec_2',
+    category: 'technical',
+    topic: 'Cybersecurity',
+    question: 'What is the safest way to store user passwords in an application database?',
+    options: [
+      'Use a slow password-hashing algorithm such as Argon2 or bcrypt with a unique salt',
+      'Encrypt every password with one key stored in the same database',
+      'Store passwords as plain text so support staff can recover them',
+      'Encode passwords with Base64 before saving them'
+    ],
+    correctAnswer: 0,
+    points: 15
+  },
+  {
+    id: 'q_apt_2',
+    category: 'logical',
+    topic: 'Aptitude',
+    question: 'An API handles 240 requests per second and each request takes 250ms on average. Approximately how many requests are concurrently in service?',
+    options: [
+      '60 concurrent requests, using L = arrival rate × latency',
+      '15 concurrent requests',
+      '240 concurrent requests exactly',
+      '960 concurrent requests'
+    ],
+    correctAnswer: 0,
+    scenarioContext: 'Little’s Law gives L = 240 requests/second × 0.25 seconds = 60 concurrent requests.',
+    points: 15
+  },
+  {
+    id: 'q_soft_2',
+    category: 'communication',
+    topic: 'Soft Skills',
+    question: 'A teammate submits code that fails a critical test shortly before release. What is the strongest professional response?',
+    options: [
+      'Share the failing evidence privately, focus on the risk, offer to pair on a fix, and agree on a revised release decision',
+      'Merge it silently and let production reveal the issue',
+      'Blame the teammate in the team channel before investigating',
+      'Delete the failing test so the pipeline turns green'
+    ],
+    correctAnswer: 0,
+    points: 15
+  }
+);
+
+SAMPLE_ASSESSMENT_QUESTIONS.push(
+  {
+    id: 'q_py_4', category: 'technical', topic: 'Python',
+    question: 'What is the benefit of using a context manager with a file or database connection?',
+    options: ['It guarantees cleanup such as closing the resource when the block exits', 'It makes every operation asynchronous', 'It disables exceptions inside the block', 'It stores the resource permanently in memory'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_java_4', category: 'technical', topic: 'Java',
+    question: 'Why should equals() and hashCode() be implemented consistently for objects used as HashMap keys?',
+    options: ['Equal objects must produce the same hash so lookups find the correct bucket', 'It makes all objects immutable', 'It prevents the JVM from using garbage collection', 'It converts keys into sorted arrays'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_dsa_4', category: 'logical', topic: 'DSA',
+    question: 'Which approach is appropriate for finding the shortest path in a graph with non-negative edge weights?',
+    options: ['Dijkstra’s algorithm with a priority queue', 'Depth-first search without tracking distances', 'A binary search on the vertex labels', 'Randomly selecting the next edge'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_dbms_4', category: 'mcq', topic: 'DBMS',
+    question: 'What problem does a database transaction solve when transferring money between two accounts?',
+    options: ['It keeps the debit and credit atomic so a partial transfer is not committed', 'It guarantees unlimited storage capacity', 'It removes the need for authentication', 'It makes every query execute in constant time'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_os_4', category: 'technical', topic: 'OS',
+    question: 'What is the main advantage of virtual memory?',
+    options: ['It gives processes an isolated address space and can extend usable memory with disk backing', 'It makes disk storage faster than CPU cache', 'It removes all page faults', 'It allows a process to access every other process’s memory'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_cn_4', category: 'technical', topic: 'CN',
+    question: 'What does TLS provide when a browser connects to an HTTPS server?',
+    options: ['Encrypted transport, server authentication, and message integrity', 'Faster DNS resolution without any certificates', 'A guarantee that the server never has downtime', 'Compression of every database table'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_web_4', category: 'technical', topic: 'Web Development',
+    question: 'Which practice improves accessibility for an interactive icon-only button?',
+    options: ['Provide an accessible name with aria-label or visible text and a keyboard-focusable button element', 'Use a div with only a click handler', 'Hide the control from screen readers', 'Remove focus styles to make the design cleaner'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_ai_4', category: 'technical', topic: 'AI/ML',
+    question: 'What is an embedding commonly used for in an AI application?',
+    options: ['Representing text or other data as vectors that support semantic similarity search', 'Encrypting an API key in browser storage', 'Guaranteeing that a model cannot hallucinate', 'Replacing all relational database constraints'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_ds_3', category: 'technical', topic: 'Data Science',
+    question: 'What is the purpose of a train, validation, and test split?',
+    options: ['Train parameters, tune decisions, and estimate final generalization on unseen data', 'Create three copies of the same rows for a larger sample', 'Remove the need to define a target variable', 'Guarantee that a model is unbiased'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_cloud_3', category: 'technical', topic: 'Cloud',
+    question: 'What does horizontal scaling mean for a stateless web service?',
+    options: ['Adding more service instances behind a load balancer', 'Increasing the font size of the service dashboard', 'Adding more CPU to one existing process only', 'Moving all logs into the application image'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_sec_3', category: 'technical', topic: 'Cybersecurity',
+    question: 'Why is least privilege important for application service accounts?',
+    options: ['A compromised account has the smallest practical set of actions and resources available', 'It allows every service to share one administrator password', 'It prevents the need for audit logs', 'It makes authorization checks unnecessary'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_apt_3', category: 'logical', topic: 'Aptitude',
+    question: 'A product priced at 800 is discounted by 15%. What is the sale price?',
+    options: ['680', '685', '700', '720'],
+    correctAnswer: 0, points: 15
+  },
+  {
+    id: 'q_soft_3', category: 'communication', topic: 'Soft Skills',
+    question: 'What makes feedback most useful during a code review?',
+    options: ['Describe the observable issue, explain its impact, and suggest a concrete improvement respectfully', 'Use vague criticism so the author guesses the fix', 'Comment only after deployment', 'Focus on the author instead of the code'],
+    correctAnswer: 0, points: 15
+  }
+);
+
 // --------------------------------------------------------------------------
 // CAREER RECOMMENDATIONS (Salaries in INR ₹)
 // --------------------------------------------------------------------------
@@ -704,7 +972,7 @@ export const SAMPLE_INTERNSHIPS: Internship[] = [
       'Participate in simulated red team / blue team security drills'
     ],
     technologies: ['Burp Suite', 'Wireshark', 'Python', 'Docker', 'OAuth 2.0'],
-    applyUrl: 'https://example.com/careers/cyber',
+    applyUrl: 'https://www.cisa.gov/careers',
     deadline: 'June 20, 2026',
     simulationAvailable: true,
     featured: false
@@ -1168,6 +1436,336 @@ const result = await db.query(
     ]
   }
 ];
+
+const EXTENDED_LEARNING_LESSONS: Record<string, CourseLesson[]> = {
+  crs_aiml_genai: [
+    {
+      id: 'les_ai_3',
+      title: '3. Tool Calling, Agents & Guardrails',
+      duration: '24 min',
+      contentMarkdown: `### Designing Reliable AI Agents
+An agent connects a model to tools, memory, and a control loop. Production agents need narrow tool contracts, explicit permissions, bounded retries, and human review for sensitive actions.
+
+#### Build Checklist
+1. Define typed input and output schemas for every tool.
+2. Validate arguments before calling external systems.
+3. Log each tool call with request ID, latency, and outcome.
+4. Stop after a maximum number of turns to control cost.`,
+      codeExample: `function validateToolArgs(args: unknown): { skill: string } {
+  if (!args || typeof (args as { skill?: unknown }).skill !== 'string') {
+    throw new Error('Invalid tool arguments');
+  }
+  return args as { skill: string };
+}`,
+      language: 'typescript',
+      quiz: {
+        question: 'Which control prevents an agent from running forever?',
+        options: ['A maximum turn or retry limit', 'A larger context window', 'Higher temperature', 'Removing request logs'],
+        correctIndex: 0,
+        explanation: 'Bounded turns and retries make agent cost and execution time predictable.'
+      }
+    },
+    {
+      id: 'les_ai_4',
+      title: '4. Evaluation, Hallucination Testing & Production Monitoring',
+      duration: '26 min',
+      contentMarkdown: `### Measure AI Quality Like a Product Feature
+Build a small evaluation set before changing prompts. Score groundedness, relevance, refusal behavior, latency, and token cost. Compare a new prompt or model against a baseline instead of relying on a few manually selected examples.
+
+In production, sample responses for review, track failure categories, redact sensitive data from logs, and provide a clear fallback when the model is unavailable.`,
+      codeExample: `const evaluation = testCases.map(({ input, expected }) => ({
+  input,
+  expected,
+  actual: runModel(input),
+  grounded: retrievedSourcesWereUsed(input)
+}));
+const groundedRate = evaluation.filter(item => item.grounded).length / evaluation.length;`,
+      language: 'typescript'
+    }
+  ],
+  crs_aiml_foundations: [
+    {
+      id: 'les_aiml_f2',
+      title: '2. Classification Metrics & Data Leakage',
+      duration: '20 min',
+      contentMarkdown: `### Evaluating Models Honestly
+Accuracy can hide poor performance on imbalanced datasets. Use precision when false positives are expensive, recall when missed positives are expensive, and F1 when both matter.
+
+Split data before fitting scaling or feature selection. If validation information influences training, the score is inflated by leakage.`,
+      codeExample: `from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42
+)
+model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+model.fit(X_train, y_train)`,
+      language: 'python',
+      quiz: {
+        question: 'Why should preprocessing be fitted only on training data?',
+        options: ['To prevent validation information leaking into the model', 'To increase features', 'To remove testing', 'To make labels continuous'],
+        correctIndex: 0,
+        explanation: 'Fitting preprocessing on all data lets the model see validation statistics indirectly.'
+      }
+    },
+    {
+      id: 'les_aiml_f3',
+      title: '3. Neural Network Training & Experiment Tracking',
+      duration: '22 min',
+      contentMarkdown: `### From Loss Curves to Better Models
+Training loss measures fit to seen examples; validation loss measures generalization. A widening gap usually means overfitting, which can be addressed with more data, regularization, dropout, or early stopping.
+
+Record dataset version, hyperparameters, random seed, metrics, and the model artifact for every experiment. Reproducibility is an engineering feature.`,
+      codeExample: `for epoch in range(epochs):
+    model.train()
+    train_loss = train_one_epoch(model, train_loader, optimizer)
+    model.eval()
+    val_loss = evaluate(model, validation_loader)
+    print({"epoch": epoch, "train_loss": train_loss, "val_loss": val_loss})`,
+      language: 'python'
+    }
+  ],
+  crs_fullstack_react: [
+    {
+      id: 'les_fs_2',
+      title: '2. Server State, Forms & Resilient Data Fetching',
+      duration: '22 min',
+      contentMarkdown: `### Making UI State Predictable
+Separate server state from local UI state. Every request should represent loading, success, empty, and error states. Disable duplicate submissions, show retry actions, and keep stale data visible while a refresh is in flight when helpful.
+
+Keep API transformation logic at the boundary so components receive predictable typed data.`,
+      codeExample: `async function loadCourses(signal?: AbortSignal): Promise<Course[]> {
+  const response = await fetch('/api/courses', { signal });
+  if (!response.ok) throw new Error('Unable to load courses');
+  const payload: { courses: Course[] } = await response.json();
+  return payload.courses;
+}`,
+      language: 'typescript',
+      quiz: {
+        question: 'Which states should a data-fetching component represent?',
+        options: ['Loading, success, empty, and error', 'Only response data', 'Only a spinner', 'Only the last error'],
+        correctIndex: 0,
+        explanation: 'Explicit request states prevent blank screens and make recovery actions discoverable.'
+      }
+    },
+    {
+      id: 'les_fs_3',
+      title: '3. Testing, Accessibility & Production Readiness',
+      duration: '24 min',
+      contentMarkdown: `### Shipping Interfaces People Can Trust
+Test user behavior: selecting a module, submitting a form, handling an API error, and recovering from failure. Use semantic buttons and labels, visible keyboard focus, meaningful alt text, and sufficient contrast.
+
+Before release, check the production build, console errors, mobile layout, and empty state for every data-driven screen.`,
+      codeExample: `test('shows an error and retry action', async () => {
+  render(<CourseList />);
+  expect(await screen.findByText('Unable to load courses')).toBeVisible();
+  expect(screen.getByRole('button', { name: /retry/i })).toBeEnabled();
+});`,
+      language: 'typescript'
+    }
+  ],
+  crs_fullstack_node: [
+    {
+      id: 'les_fs_n2',
+      title: '2. Authentication, Authorization & Input Validation',
+      duration: '20 min',
+      contentMarkdown: `### Protecting an API Boundary
+Authentication answers who the caller is; authorization answers what they may do. Validate request bodies, query parameters, and route identifiers before business logic. Return consistent errors without leaking stack traces or database details.
+
+A valid token must not grant access to another user's record. Check ownership at the resource operation.`,
+      codeExample: `const input = createRecordSchema.parse(req.body);
+const record = await records.create(req.user.id, input);
+res.status(201).json({ record });`,
+      language: 'typescript',
+      quiz: {
+        question: 'What is the difference between authentication and authorization?',
+        options: ['Identity versus permissions', 'Encryption versus compression', 'Caching versus logging', 'Parsing versus rendering'],
+        correctIndex: 0,
+        explanation: 'Authentication identifies the caller; authorization determines allowed actions and resources.'
+      }
+    },
+    {
+      id: 'les_fs_n3',
+      title: '3. Transactions, Indexes & Observability',
+      duration: '25 min',
+      contentMarkdown: `### Reliable Services Need Reliable Data Access
+Use transactions when multiple writes must succeed or fail together. Add indexes based on real query patterns, inspect plans with EXPLAIN ANALYZE, and avoid selecting unused columns on high-traffic endpoints.
+
+Measure request duration, error rate, database latency, and slow query frequency. Correlate logs with a request ID across services.`,
+      codeExample: `await db.transaction(async (client) => {
+  const order = await client.query(
+    'INSERT INTO orders (user_id, total) VALUES ($1, $2) RETURNING id',
+    [userId, total]
+  );
+  await client.query('INSERT INTO audit_events (entity_id, event_type) VALUES ($1, $2)', [order.rows[0].id, 'order.created']);
+});`,
+      language: 'typescript'
+    }
+  ],
+  crs_data_sql: [
+    {
+      id: 'les_da_2',
+      title: '2. CTEs, Cohort Analysis & Retention',
+      duration: '24 min',
+      contentMarkdown: `### Turning Events into Product Decisions
+Common table expressions make analytical queries readable by separating first activity, monthly activity, and retained users. Define the cohort date once, then compare later activity to that cohort.
+
+Always state the grain: one row per user, order, session, or event. Joining different grains without care creates duplicate counts.`,
+      codeExample: `WITH first_activity AS (
+  SELECT user_id, MIN(event_at)::date AS cohort_date FROM events GROUP BY user_id
+), monthly_activity AS (
+  SELECT DISTINCT user_id, date_trunc('month', event_at)::date AS activity_month FROM events
+)
+SELECT cohort_date, activity_month, COUNT(*) AS active_users
+FROM first_activity JOIN monthly_activity USING (user_id)
+GROUP BY cohort_date, activity_month;`,
+      language: 'sql',
+      quiz: {
+        question: 'Why document the grain of each table?',
+        options: ['To prevent accidental duplicate counts during joins', 'To increase query temperature', 'To remove all nulls', 'To avoid date fields'],
+        correctIndex: 0,
+        explanation: 'Knowing the row grain helps you choose safe joins and aggregation levels.'
+      }
+    },
+    {
+      id: 'les_da_3',
+      title: '3. Query Plans, Indexes & Analytical Performance',
+      duration: '23 min',
+      contentMarkdown: `### Read the Plan Before Changing the Query
+EXPLAIN ANALYZE shows chosen operations and actual row counts. Look for sequential scans on large filtered tables, high loop counts, inaccurate estimates, and sorts that spill to disk.
+
+An index helps only when it supports a common filter, join, or ordering pattern. Measure before and after because indexes add write and storage cost.`,
+      codeExample: `EXPLAIN (ANALYZE, BUFFERS)
+SELECT user_id, SUM(amount) FROM orders
+WHERE created_at >= CURRENT_DATE - INTERVAL '30 days'
+GROUP BY user_id;`,
+      language: 'sql'
+    }
+  ],
+  crs_data_pipelines: [
+    {
+      id: 'les_da_p2',
+      title: '2. Joins, Missing Values & Data Quality Rules',
+      duration: '20 min',
+      contentMarkdown: `### Clean Data with Explicit Rules
+Profile before cleaning: check null percentages, unique values, duplicate keys, impossible ranges, and inconsistent categories. Keep a record of transformations so the report can be reproduced.
+
+Zero, unknown, not applicable, and unavailable are different meanings. Choose a missing-value strategy from the domain, not convenience.`,
+      codeExample: `quality = (df.isna().mean() * 100).sort_values(ascending=False)
+duplicates = df.duplicated(subset=['user_id', 'event_at']).sum()
+df['country'] = df['country'].str.strip().str.upper()
+df['revenue'] = df['revenue'].clip(lower=0)`,
+      language: 'python',
+      quiz: {
+        question: 'What should happen before choosing how to fill missing values?',
+        options: ['Understand what the missing value means', 'Replace every value with zero', 'Drop every row', 'Convert all columns to text'],
+        correctIndex: 0,
+        explanation: 'The correct treatment depends on whether missing means zero, unknown, or not applicable.'
+      }
+    },
+    {
+      id: 'les_da_p3',
+      title: '3. Communicating Insights with Reproducible Reports',
+      duration: '18 min',
+      contentMarkdown: `### From Charts to Decisions
+A useful report explains what changed, why it changed, how confident you are, and what action should follow. Label axes, units, date ranges, sample sizes, and comparison baselines.
+
+Separate observed facts from interpretation so stakeholders can challenge assumptions productively.`,
+      codeExample: `figure = px.line(
+    weekly_sales, x='week', y='revenue', color='channel',
+    title='Weekly revenue by acquisition channel',
+    labels={'revenue': 'Revenue (USD)'}
+)`,
+      language: 'python'
+    }
+  ],
+  crs_cloud_docker: [
+    {
+      id: 'les_cl_2',
+      title: '2. Kubernetes Deployments, Services & Health Checks',
+      duration: '24 min',
+      contentMarkdown: `### Running Containers Reliably
+A Deployment describes the desired number and version of Pods. A Service gives them a stable network identity. Readiness probes control traffic; liveness probes restart stuck containers.
+
+Set CPU and memory requests so the scheduler can place workloads, and limits so one process cannot consume an entire node.`,
+      codeExample: `apiVersion: apps/v1
+kind: Deployment
+metadata: { name: api }
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: api
+          image: skillsphere/api:1.4.0
+          readinessProbe:
+            httpGet: { path: /api/health, port: 3000 }`,
+      language: 'yaml',
+      quiz: {
+        question: 'Which probe determines whether a Pod should receive traffic?',
+        options: ['Readiness probe', 'Liveness probe', 'Build probe', 'Image probe'],
+        correctIndex: 0,
+        explanation: 'Readiness indicates that the application is prepared to serve requests.'
+      }
+    },
+    {
+      id: 'les_cl_3',
+      title: '3. CI/CD, Secrets & Deployment Rollbacks',
+      duration: '22 min',
+      contentMarkdown: `### Safe Delivery to Production
+A pipeline should install dependencies reproducibly, run tests, build an immutable artifact, scan it, and promote the same artifact through environments. Store secrets in a platform secret manager, never in source control.
+
+Release gradually with health checks and keep a tested rollback plan.`,
+      codeExample: `- run: npm ci
+- run: npm test -- --runInBand
+- run: npm run build
+- run: docker build --tag skillsphere/api:$GITHUB_SHA .`,
+      language: 'yaml'
+    }
+  ],
+  crs_cyber_sec: [
+    {
+      id: 'les_sec_2',
+      title: '2. XSS, CSRF, CSP & Secure Browser Boundaries',
+      duration: '22 min',
+      contentMarkdown: `### Protecting the Browser as an Attack Surface
+Cross-site scripting occurs when attacker-controlled content is interpreted as code. Prefer framework escaping, avoid raw HTML injection, and sanitize rich text with an allowlist. Content Security Policy adds a second layer by limiting executable sources.
+
+For cookie sessions, use SameSite and CSRF tokens. CORS is not authentication; it controls which browsers may read responses.`,
+      codeExample: `app.use(helmet({
+  contentSecurityPolicy: {
+    directives: { defaultSrc: ["'self'"], scriptSrc: ["'self'"], objectSrc: ["'none'"] }
+  }
+}));`,
+      language: 'typescript',
+      quiz: {
+        question: 'What does a Content Security Policy primarily restrict?',
+        options: ['Which sources the browser may load or execute', 'Which database rows a user owns', 'How passwords are hashed', 'The number of API requests'],
+        correctIndex: 0,
+        explanation: 'CSP limits browser resource and script sources, reducing the impact of injected code.'
+      }
+    },
+    {
+      id: 'les_sec_3',
+      title: '3. Secure Authentication, Secrets & Threat Modeling',
+      duration: '25 min',
+      contentMarkdown: `### Make Security Decisions Deliberate
+Threat modeling asks what you protect, who can attack it, which trust boundaries exist, and what happens if a control fails. Use short-lived tokens, strong password hashing, key rotation, and least-privilege service accounts.
+
+Never place private keys, database passwords, or server API keys in frontend bundles. Log security events without passwords, tokens, or sensitive personal data.`,
+      codeExample: `const passwordHash = await argon2.hash(password);
+const valid = await argon2.verify(passwordHash, submittedPassword);
+if (!valid) return res.status(401).json({ error: 'Invalid credentials' });`,
+      language: 'typescript'
+    }
+  ]
+};
+
+SAMPLE_COURSES.forEach((course) => {
+  course.lessons.push(...(EXTENDED_LEARNING_LESSONS[course.id] || []));
+});
 
 // --------------------------------------------------------------------------
 // CODE ARENA PROBLEM SET (12+ Curated Problems with Examples, Hints & Constraints)
@@ -1665,7 +2263,7 @@ export const SAMPLE_CERTIFICATES: Certificate[] = [
     score: 94,
     skills: ['React 19', 'Express Route Optimization', 'SQL Aggregations', 'Defensive Error Handling'],
     skillsDemonstrated: ['React 19', 'Express Route Optimization', 'SQL Aggregations', 'Defensive Error Handling'],
-    verificationUrl: 'https://ais-dev.career.app/verify/AICAREER-2026-FS-9428'
+    verificationUrl: '#/verify/AICAREER-2026-FS-9428'
   }
 ];
 

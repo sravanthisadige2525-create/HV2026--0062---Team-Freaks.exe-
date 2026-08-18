@@ -319,7 +319,7 @@ class DatabaseService {
             score: d.score || 90,
             skills: d.skills || [],
             skillsDemonstrated: d.skills_demonstrated || d.skills || [],
-            verificationUrl: d.verification_url || `https://ais-dev.career.app/verify/${d.certificate_number || d.id}`,
+            verificationUrl: d.verification_url || `#/verify/${d.certificate_number || d.id}`,
             issuedAt: d.issued_at,
             issueDate: d.issued_at
           }));

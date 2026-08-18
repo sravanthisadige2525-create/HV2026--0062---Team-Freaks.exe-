@@ -37,6 +37,7 @@ import { CertificatesView } from './components/CertificatesView';
 import { AdminDashboardView } from './components/AdminDashboardView';
 import { SupabaseSetupModal } from './components/SupabaseSetupModal';
 import { AuthModal } from './components/AuthModal';
+import { Database } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
@@ -65,8 +66,15 @@ export default function App() {
     const handleUrlRoute = () => {
       const path = window.location.pathname;
       const hash = window.location.hash;
+      const normalizedHash = hash.replace(/^#\/?/, '');
+
       if (path === '/admin' || hash === '#admin' || hash === '#/admin') {
         setCurrentTab('admin');
+        return;
+      }
+
+      if (normalizedHash.startsWith('verify/')) {
+        setCurrentTab('certificates');
       }
     };
 
@@ -228,7 +236,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <main className="flex-1 min-w-0 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
         
         {currentTab === 'dashboard' && (
           <DashboardView
@@ -402,6 +410,14 @@ export default function App() {
 
           <div className="flex items-center gap-4">
             <span>v2.5.0 Production Ready</span>
+            <button
+              type="button"
+              onClick={() => setIsSupabaseModalOpen(true)}
+              className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition"
+            >
+              <Database className="w-3.5 h-3.5" />
+              <span>Database Settings</span>
+            </button>
           </div>
         </div>
       </footer>

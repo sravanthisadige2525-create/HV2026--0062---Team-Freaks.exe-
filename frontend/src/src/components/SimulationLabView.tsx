@@ -117,6 +117,7 @@ export const SimulationLabView: React.FC<SimulationLabViewProps> = ({
 
         // Check if all tasks in simulation completed!
         if (nextCompleted.length === simulation.tasks.length) {
+          const certificateNumber = `SPHERE-SIM-${Math.floor(100000 + Math.random() * 900000)}`;
           const newCert: SimulationCertificate = {
             id: `cert_sim_${Date.now()}`,
             userId: user.id,
@@ -124,8 +125,8 @@ export const SimulationLabView: React.FC<SimulationLabViewProps> = ({
             internshipTitle: simulation.role,
             company: simulation.company,
             issueDate: new Date().toISOString(),
-            certificateNumber: `SPHERE-SIM-${Math.floor(100000 + Math.random() * 900000)}`,
-            verificationUrl: `https://skillsphere.ai/verify/SPHERE-SIM-${Math.floor(100000 + Math.random() * 900000)}`,
+            certificateNumber,
+            verificationUrl: `#/verify/${certificateNumber}`,
             score: 94,
             skillsDemonstrated: ['Express TypeScript API', 'PostgreSQL Query Plan', 'React Error Boundaries', 'Production PR Review']
           };

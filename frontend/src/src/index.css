@@ -9,6 +9,13 @@
 
   body {
     font-family: var(--font-sans);
+    min-width: 320px;
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -17,6 +24,16 @@
 
   code, pre, .font-mono {
     font-family: var(--font-mono);
+  }
+}
+
+@media (max-width: 640px) {
+  .glass-panel {
+    border-radius: 1.25rem;
+  }
+
+  button, a, input, select, textarea {
+    max-width: 100%;
   }
 }
 

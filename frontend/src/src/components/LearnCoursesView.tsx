@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   BookOpen, 
   CheckCircle2, 
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Course, Lesson, UserProfile, SimulationCertificate } from '../types';
+import { LEARNING_MODULE_CATEGORIES } from '../lib/mockData';
 import { dbService } from '../lib/supabase';
 
 interface LearnCoursesViewProps {
@@ -34,15 +35,35 @@ export const LearnCoursesView: React.FC<LearnCoursesViewProps> = ({
   onUpdateProgress,
   onNavigateToCertificates
 }) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Modules');
   const [selectedCourseId, setSelectedCourseId] = useState<string>(initialCourseId || courses[0]?.id || 'crs_web_fullstack');
   const [activeLessonId, setActiveLessonId] = useState<string | null>(null);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
 
-  const selectedCourse = courses.find(c => c.id === selectedCourseId) || courses[0];
-  const activeLesson: Lesson = selectedCourse?.lessons.find(l => l.id === activeLessonId) || selectedCourse?.lessons[0];
+  const categories = ['All Modules', ...LEARNING_MODULE_CATEGORIES];
+  const visibleCourses = selectedCategory === 'All Modules'
+    ? courses
+    : courses.filter((course) => course.category === selectedCategory);
 
-  const currentProg = courseProgress[selectedCourse.id] || { completedLessons: [], progress: 0, isCompleted: false };
+  const selectedCourse = visibleCourses.find((course) => course.id === selectedCourseId) || visibleCourses[0] || courses[0];
+  const activeLesson: Lesson = selectedCourse?.lessons.find((l) => l.id === activeLessonId) || selectedCourse?.lessons[0];
+  const currentProg = selectedCourse ? (courseProgress[selectedCourse.id] || { completedLessons: [], progress: 0, isCompleted: false }) : { completedLessons: [], progress: 0, isCompleted: false };
+
+  useEffect(() => {
+    if (!selectedCourse) return;
+    setSelectedCourseId(selectedCourse.id);
+    setActiveLessonId(selectedCourse.lessons[0]?.id || null);
+    setQuizAnswers({});
+    setQuizSubmitted(false);
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    if (!selectedCourse) return;
+    if (!activeLessonId || !selectedCourse.lessons.some((lesson) => lesson.id === activeLessonId)) {
+      setActiveLessonId(selectedCourse.lessons[0]?.id || null);
+    }
+  }, [selectedCourse, activeLessonId]);
 
   const handleCompleteLesson = async () => {
     if (!activeLesson) return;
@@ -51,14 +72,15 @@ export const LearnCoursesView: React.FC<LearnCoursesViewProps> = ({
     // If this completed all lessons in the course, award a course certificate!
     const nextCompleted = Array.from(new Set([...currentProg.completedLessons, activeLesson.id]));
     if (nextCompleted.length === selectedCourse.lessons.length) {
+      const certificateNumber = `SPHERE-CRS-${Math.floor(100000 + Math.random() * 900000)}`;
       const courseCert: SimulationCertificate = {
         id: `cert_crs_${Date.now()}`,
         userId: user.id,
         internshipTitle: `${selectedCourse.title} Professional Specialization`,
         company: 'SkillSphere Career Academy',
         issueDate: new Date().toISOString(),
-        certificateNumber: `SPHERE-CRS-${Math.floor(100000 + Math.random() * 900000)}`,
-        verificationUrl: `https://skillsphere.ai/verify/SPHERE-CRS-${Math.floor(100000 + Math.random() * 900000)}`,
+        certificateNumber,
+        verificationUrl: `#/verify/${certificateNumber}`,
         score: 98,
         skillsDemonstrated: selectedCourse.topics
       };
@@ -97,10 +119,31 @@ export const LearnCoursesView: React.FC<LearnCoursesViewProps> = ({
         </button>
       </div>
 
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-3">
+        <div className="flex flex-wrap gap-2">
+          {categories.map((category) => {
+            const isActive = selectedCategory === category;
+            return (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-3 py-2 rounded-xl text-xs font-semibold border transition ${
+                  isActive
+                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/20'
+                    : 'bg-slate-950/60 text-slate-300 border-slate-700 hover:border-slate-600 hover:text-white'
+                }`}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Course Cards Carousel / Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {courses.map(course => {
-          const isSelected = course.id === selectedCourse.id;
+        {visibleCourses.map(course => {
+          const isSelected = course.id === selectedCourse?.id;
           const prog = courseProgress[course.id] || { progress: 0, isCompleted: false };
           return (
             <div
@@ -118,13 +161,12 @@ export const LearnCoursesView: React.FC<LearnCoursesViewProps> = ({
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">{course.level}</span>
-                  <span className="text-xs text-slate-400 font-mono">{course.estimatedHours} hrs</span>
+                  <span className="text-xs text-slate-400 font-mono">{course.lessons.length} modules</span>
                 </div>
                 <h3 className="font-bold text-sm text-white line-clamp-2">{course.title}</h3>
                 <p className="text-xs text-slate-400 mt-2 line-clamp-2">{course.description}</p>
               </div>
 
-              {/* Progress */}
               <div className="mt-4 pt-3 border-t border-slate-800/80">
                 <div className="flex items-center justify-between text-[11px] mb-1">
                   <span className="text-slate-400">Progress</span>
@@ -200,18 +242,18 @@ export const LearnCoursesView: React.FC<LearnCoursesViewProps> = ({
 
             {/* Lesson Body Content */}
             <div className="prose prose-invert max-w-none text-xs sm:text-sm text-slate-300 leading-relaxed space-y-4">
-              <p>{activeLesson.content}</p>
+              <p>{activeLesson.content || activeLesson.contentMarkdown || 'This module contains guided learning content for the selected skill track.'}</p>
             </div>
 
             {/* Code Snippet Box */}
-            {activeLesson.codeSnippet && (
+            {(activeLesson.codeSnippet || activeLesson.codeExample) && (
               <div className="rounded-2xl bg-slate-950 border border-slate-800 p-4 space-y-2 font-mono text-xs">
                 <div className="flex items-center justify-between text-slate-400 pb-2 border-b border-slate-800">
                   <span className="text-indigo-300 font-semibold">Production Code Implementation</span>
                   <span>TypeScript / ESM</span>
                 </div>
                 <pre className="text-emerald-400 whitespace-pre-wrap overflow-x-auto">
-                  {activeLesson.codeSnippet}
+                  {activeLesson.codeSnippet || activeLesson.codeExample}
                 </pre>
               </div>
             )}
